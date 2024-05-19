@@ -8,6 +8,12 @@ to formation of data.
 
 This library is based on fitting capabilities of [lmfit](https://lmfit.github.io//lmfit-py/).
 
+The whole idea of mixture fitting and fitting sums using least squares
+is built on the ideas of
+
+* [Fitting mixtures of statistical distributions](https://arvix.org/abs/1901.06708)
+* [Bundle adjustment methods in engineering photogrammetry](https://doi.org/10.1111/j.1477-9730.1980.tb00020.x)
+
 ## Currently implemented model functions
 
 * Constant (```mixfitfunctions.constant.MixfitFunctionConstantFactory```)
