@@ -45,8 +45,61 @@ further improvements. Possible abort conditions are:
   fit quality of the fit goes below the threashold the process is aborted
 * ```maxIterations``` limits the number of components that are fit
 
+One may supply a list of allowed functions as well as their limits using
+the ```allowed``` argument:
+
 ## Example
 
-For more advanced examples take a look at the ```examples``` directory
+For more advanced examples take a look at the ```examples``` directory.
 
+### Fitting arbitrary models into our data
+
+```
+import numpy as np
+import matplotlib.pyplot as plt
+
+from mixfit.mixfit import Mixfit
+
+data = np.load("examplefile.npz")
+
+# Just a way to get the sample data
+# This data includes different runs capturing
+# in-phase and quadrature channels during
+# frequency sweeps. The x axis is the frequencies,
+# the fitted data is the mean of all runs
+x = data["f_RF"]
+I = data["sigI"].mean(1)
+
+# Now create the mixture fitter for _all_
+# models
+mf = Mixfit(
+	maxIterations = 4,
+	stopError = 0.05
+)
+
+# And execute
+resI = mf.fit(x, I)
+
+# Plot
+fig, ax = plt.subplots(1, 2, figsize=(6.4*2, 4.8))
+ax[0].plot(x*2, I) # We plot raw data
+ax[0].plot(x*2, resI(x)) # and our fit result
+ax[0].grid()
+
+ax[1].plot(resI._chis)
+ax[1].grid()
+
+plt.show()
+```
+
+Running this code yields the following decomposition:
+
+```
+DiffGaussian(amp=6.710041629819328+-4.470775516222519, mu=175.76446887225788+-0.1454700003529027, sigma=1.4076661399565236+-0.3343414565050647, offset=-23320382.44684337+-112828498842278.73)
+DiffGaussian(amp=2.774258665757228+-1.4958867327164893, mu=179.76706853968935+-0.4050248108850253, sigma=1.2976513505933047+-0.3279503072202676, offset=17745816.52197658+-175430109563261.66)
+Cauchy(amp=-2.7037880990536274+-3.5613251200337626, x0=179.17057600546437+-0.08406908277066111, gamma=0.6377217109551133+-0.3774710838448468, offset=5574563.378103231+-166637348925010.78)
+DiffCauchy(amp=0.01760683178016082+-0.03633273296203317, x0=175.6555822822984+-0.028894691836587848, gamma=0.06706371066814047+-0.12080936119483864, offset=0.002912072266518264+-4552116.210404506)
+```
+
+![](https://raw.githubusercontent.com/tspspi/pymixfit/master/examples/2024-04-26_154015_peak__example00.png)
 
