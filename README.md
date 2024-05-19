@@ -14,11 +14,20 @@ is built on the ideas of
 * [Fitting mixtures of statistical distributions](https://arvix.org/abs/1901.06708)
 * [Bundle adjustment methods in engineering photogrammetry](https://doi.org/10.1111/j.1477-9730.1980.tb00020.x)
 
+## Installation
+
+```
+pip install pymixfit-tspspi
+```
+
 ## Currently implemented model functions
 
 * Constant (```mixfitfunctions.constant.MixfitFunctionConstantFactory```)
+   * $f(x) = \text{offset}$
 * Linear (```mixfitfunctions.linear.MixfitFunctionLinearFactory```)
+   * $f(x) = \text{slope} * x + \text{intercept}$
 * Gaussian (```mixfitfunctions.gaussian.MixfitFunctionGaussianFactory```)
+   * $f(x) = \text{amp} * \frac{1}{\sqrt{2 \pi}} e^{- \frac{1}{2} \left(\frac{x-\mu}{\sigma}\right)^2} + \text{offset}$
 * Differential Gaussian (```mixfitfunctions.differentialgaussian.MixfitFunctionDifferentialGaussian```)
 * Cauchy / Lorentz (```mixfitfunctions.cauchy.MixfitFunctionCauchyFactory```)
 * Differential Cauchy / Lorentz (```mixfitfunctions.cauchy.MixfitFunctionDifferentialCauchyFactory```)
