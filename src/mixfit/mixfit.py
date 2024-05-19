@@ -62,6 +62,12 @@ class Mixture:
                 newParams[-1].add(globalRes.params[p2])
         self._params = newParams
 
+    def __repr__(self):
+        res = ""
+        for ifun, fun in enumerate(self._functions):
+            res = res + "\n" + fun._p_repr(self._params[ifun])
+        return res
+
 
 class Mixfit:
     def __init__(
