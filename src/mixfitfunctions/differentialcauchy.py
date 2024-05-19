@@ -89,3 +89,7 @@ class MixfitFunctionDifferentialCauchy(MixfitFunction):
                     f"{pfx}offset" : np.max(data)
             }
 
+    def _p_repr(self, params):
+        amp, x0, gamma, offs = self._parse_pparms(params)
+        return f"DiffCauchy(amp={amp.value}+-{amp.stderr}, x0={x0.value}+-{x0.stderr}, gamma={gamma.value}+-{gamma.stderr}, offset={offs.value}+-{offs.stderr})"
+

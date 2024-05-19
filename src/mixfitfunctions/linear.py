@@ -75,3 +75,6 @@ class MixfitFunctionLinear(MixfitFunction):
             f"{pfx}intercept" : d
         }
 
+    def _p_repr(self, params):
+        slope, intercept = self._parse_pparms(params)
+        return f"Linear(slope={slope.value}+-{slope.stderr}, intercept={intercept.value}+-{intercept.stderr})"

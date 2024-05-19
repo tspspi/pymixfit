@@ -66,3 +66,6 @@ class MixfitFunctionConstant(MixfitFunction):
             f"{pfx}offset" : np.mean(data)
         }
 
+    def _p_repr(self, params):
+        offs = self._parse_pparms(params)
+        return f"Constant(offset={offs.value}+-{offs.stderr})"

@@ -89,3 +89,7 @@ class MixfitFunctionGaussian(MixfitFunction):
                     f"{pfx}offset" : np.max(data)
             }
 
+    def _p_repr(self, params):
+        amp, mu, sig, offs = self._parse_pparms(params)
+        return f"Gaussian(amp={amp.value}+-{amp.stderr}, mu={mu.value}+-{mu.stderr}, sigma={sig.value}+-{sig.stderr}, offset={offs.value}+-{offs.stderr})"
+
